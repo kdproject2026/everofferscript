@@ -32,7 +32,6 @@
       overflow-x: hidden;
     }
 
-    /* Scanline overlay */
     body::before {
       content: '';
       position: fixed;
@@ -48,7 +47,6 @@
       z-index: 9999;
     }
 
-    /* Header */
     header {
       background: var(--panel);
       border-bottom: 2px solid var(--cyan);
@@ -97,14 +95,12 @@
       50% { opacity: 0.3; }
     }
 
-    /* Layout */
     .container {
       max-width: 1100px;
       margin: 0 auto;
       padding: 24px 16px;
     }
 
-    /* Progress tracker */
     .progress-track {
       display: flex;
       gap: 6px;
@@ -141,7 +137,6 @@
       background: #00ff8811;
     }
 
-    /* Cards */
     .card {
       background: var(--panel);
       border: 1px solid var(--border);
@@ -163,6 +158,7 @@
     .card.magenta::before { background: var(--magenta); box-shadow: var(--glow-magenta); }
     .card.green::before { background: var(--green); box-shadow: var(--glow-green); }
     .card.yellow::before { background: var(--yellow); }
+    .card.orange::before { background: #ff8800; box-shadow: 0 0 8px #ff8800, 0 0 20px #ff880044; }
 
     .card-title {
       font-family: 'Orbitron', monospace;
@@ -179,8 +175,8 @@
     .card.magenta .card-title { color: var(--magenta); text-shadow: var(--glow-magenta); }
     .card.green .card-title { color: var(--green); text-shadow: var(--glow-green); }
     .card.yellow .card-title { color: var(--yellow); }
+    .card.orange .card-title { color: #ff8800; text-shadow: 0 0 8px #ff8800; }
 
-    /* Script lines */
     .script-line {
       display: flex;
       gap: 12px;
@@ -208,7 +204,87 @@
       text-shadow: var(--glow-cyan);
     }
 
-    /* Branch buttons */
+    .tip-box {
+      background: #0d0d22;
+      border: 1px solid #1a2a1a;
+      border-left: 3px solid var(--green);
+      border-radius: 4px;
+      padding: 10px 14px;
+      margin: 6px 0 14px 34px;
+      font-size: 0.78rem;
+      color: #888;
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    .voicemail-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      background: #ff880022;
+      border: 1px solid #ff8800;
+      border-radius: 12px;
+      font-size: 0.65rem;
+      color: #ff8800;
+      letter-spacing: 2px;
+      margin-left: 10px;
+      vertical-align: middle;
+    }
+
+    .vm-tab-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .vm-tab {
+      padding: 8px 18px;
+      border: 1px solid var(--border);
+      background: transparent;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      cursor: pointer;
+      border-radius: 3px;
+      color: var(--text);
+      transition: all 0.2s;
+      text-transform: uppercase;
+    }
+
+    .vm-tab.active {
+      border-color: #ff8800;
+      color: #ff8800;
+      background: #ff880011;
+      box-shadow: 0 0 8px #ff880044;
+    }
+
+    .vm-script {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .vm-script.visible { display: block; }
+
+    .copy-vm-btn {
+      margin-top: 14px;
+      padding: 9px 20px;
+      border: 1px solid #ff8800;
+      background: transparent;
+      font-family: 'Orbitron', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      cursor: pointer;
+      border-radius: 3px;
+      color: #ff8800;
+      transition: all 0.2s;
+      text-transform: uppercase;
+    }
+
+    .copy-vm-btn:hover {
+      background: #ff880022;
+      box-shadow: 0 0 8px #ff880044;
+    }
+
     .branch-row {
       display: flex;
       gap: 12px;
@@ -231,34 +307,13 @@
       text-transform: uppercase;
     }
 
-    .branch-btn.yes {
-      border-color: var(--green);
-      color: var(--green);
-    }
-    .branch-btn.yes:hover, .branch-btn.yes.selected {
-      background: #00ff8822;
-      box-shadow: var(--glow-green);
-    }
+    .branch-btn.yes { border-color: var(--green); color: var(--green); }
+    .branch-btn.yes:hover, .branch-btn.yes.selected { background: #00ff8822; box-shadow: var(--glow-green); }
+    .branch-btn.no { border-color: var(--magenta); color: var(--magenta); }
+    .branch-btn.no:hover, .branch-btn.no.selected { background: #ff00c822; box-shadow: var(--glow-magenta); }
+    .branch-btn.maybe { border-color: var(--yellow); color: var(--yellow); }
+    .branch-btn.maybe:hover, .branch-btn.maybe.selected { background: #f0ff0022; box-shadow: 0 0 8px #f0ff00, 0 0 20px #f0ff0044; }
 
-    .branch-btn.no {
-      border-color: var(--magenta);
-      color: var(--magenta);
-    }
-    .branch-btn.no:hover, .branch-btn.no.selected {
-      background: #ff00c822;
-      box-shadow: var(--glow-magenta);
-    }
-
-    .branch-btn.maybe {
-      border-color: var(--yellow);
-      color: var(--yellow);
-    }
-    .branch-btn.maybe:hover, .branch-btn.maybe.selected {
-      background: #f0ff0022;
-      box-shadow: 0 0 8px #f0ff00, 0 0 20px #f0ff0044;
-    }
-
-    /* Branch content */
     .branch-content {
       display: none;
       margin-top: 16px;
@@ -269,22 +324,14 @@
     }
 
     .branch-content.visible { display: block; }
-
-    .branch-content.yes-content {
-      border-color: var(--green);
-      background: #00ff880a;
-    }
-    .branch-content.no-content {
-      border-color: var(--magenta);
-      background: #ff00c80a;
-    }
+    .branch-content.yes-content { border-color: var(--green); background: #00ff880a; }
+    .branch-content.no-content { border-color: var(--magenta); background: #ff00c80a; }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-8px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Property type selector */
     .prop-row {
       display: flex;
       gap: 12px;
@@ -316,16 +363,11 @@
       box-shadow: var(--glow-cyan);
     }
 
-    /* Fact find content */
-    .factfind-content {
-      display: none;
-      animation: fadeIn 0.3s ease;
-    }
+    .factfind-content { display: none; animation: fadeIn 0.3s ease; }
     .factfind-content.visible { display: block; }
 
-    /* Objections */
     .objection-item {
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       border: 1px solid var(--border);
       border-radius: 4px;
       overflow: hidden;
@@ -353,6 +395,7 @@
       color: var(--cyan);
       font-size: 1rem;
       transition: transform 0.3s;
+      min-width: 16px;
     }
 
     .objection-trigger.open .arrow { transform: rotate(90deg); }
@@ -362,14 +405,20 @@
       padding: 14px 16px;
       background: #08081a;
       font-size: 0.9rem;
-      line-height: 1.7;
+      line-height: 1.75;
       color: var(--green);
       border-top: 1px solid var(--border);
     }
 
-    .objection-answer.visible { display: block; }
+    .objection-answer.visible { display: block; animation: fadeIn 0.25s ease; }
 
-    /* Notes form */
+    .obj-tip {
+      margin-top: 8px;
+      font-size: 0.75rem;
+      color: #555;
+      font-style: italic;
+    }
+
     .lead-form {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -380,12 +429,7 @@
       .lead-form { grid-template-columns: 1fr; }
     }
 
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
     .form-group.full { grid-column: 1 / -1; }
 
     label {
@@ -414,10 +458,8 @@
     }
 
     textarea { resize: vertical; min-height: 70px; }
-
     select option { background: #0a0a1a; }
 
-    /* Buttons */
     .btn-row {
       display: flex;
       gap: 12px;
@@ -438,34 +480,13 @@
       text-transform: uppercase;
     }
 
-    .btn-primary {
-      border-color: var(--cyan);
-      color: var(--cyan);
-    }
-    .btn-primary:hover {
-      background: #00f0ff22;
-      box-shadow: var(--glow-cyan);
-    }
+    .btn-primary { border-color: var(--cyan); color: var(--cyan); }
+    .btn-primary:hover { background: #00f0ff22; box-shadow: var(--glow-cyan); }
+    .btn-danger { border-color: var(--magenta); color: var(--magenta); }
+    .btn-danger:hover { background: #ff00c822; box-shadow: var(--glow-magenta); }
+    .btn-success { border-color: var(--green); color: var(--green); }
+    .btn-success:hover { background: #00ff8822; box-shadow: var(--glow-green); }
 
-    .btn-danger {
-      border-color: var(--magenta);
-      color: var(--magenta);
-    }
-    .btn-danger:hover {
-      background: #ff00c822;
-      box-shadow: var(--glow-magenta);
-    }
-
-    .btn-success {
-      border-color: var(--green);
-      color: var(--green);
-    }
-    .btn-success:hover {
-      background: #00ff8822;
-      box-shadow: var(--glow-green);
-    }
-
-    /* Copy popup */
     .copy-toast {
       position: fixed;
       bottom: 30px;
@@ -481,31 +502,21 @@
       opacity: 0;
       transform: translateY(20px);
       transition: all 0.3s;
-      z-index: 1000;
+      z-index: 10000;
       pointer-events: none;
     }
 
-    .copy-toast.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .copy-toast.show { opacity: 1; transform: translateY(0); }
 
-    /* Divider */
     .cyber-divider {
       height: 1px;
       background: linear-gradient(90deg, transparent, var(--cyan), transparent);
       margin: 8px 0 18px;
-      opacity: 0.4;
+      opacity: 0.3;
     }
 
-    /* Section toggle */
-    .section {
-      display: none;
-    }
-    .section.active {
-      display: block;
-      animation: fadeIn 0.3s ease;
-    }
+    .section { display: none; }
+    .section.active { display: block; animation: fadeIn 0.3s ease; }
 
     .step-nav {
       display: flex;
@@ -522,12 +533,7 @@
       text-transform: uppercase;
     }
 
-    /* Motivation meter */
-    .motivation-row {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
+    .motivation-row { display: flex; gap: 8px; flex-wrap: wrap; }
 
     .mot-btn {
       padding: 8px 14px;
@@ -546,6 +552,18 @@
     .mot-btn[data-level="3"]:hover, .mot-btn[data-level="3"].sel { border-color: var(--yellow); color: var(--yellow); background: #f0ff0011; }
     .mot-btn[data-level="4"]:hover, .mot-btn[data-level="4"].sel { border-color: #88ff00; color: #88ff00; background: #88ff0011; }
     .mot-btn[data-level="5"]:hover, .mot-btn[data-level="5"].sel { border-color: var(--green); color: var(--green); background: #00ff8811; }
+
+    .highlight-word {
+      color: var(--cyan);
+      font-weight: bold;
+    }
+
+    .pause-cue {
+      color: #444;
+      font-size: 0.78rem;
+      font-style: italic;
+      margin-left: 4px;
+    }
   </style>
 </head>
 <body>
@@ -563,50 +581,45 @@
 
 <div class="container">
 
-  <!-- Progress -->
   <div class="progress-track">
     <div class="prog-step active" id="pt-0" onclick="goSection(0)">INTRO</div>
     <div class="prog-step" id="pt-1" onclick="goSection(1)">INTEREST</div>
     <div class="prog-step" id="pt-2" onclick="goSection(2)">FACT FIND</div>
     <div class="prog-step" id="pt-3" onclick="goSection(3)">PASS OFF</div>
     <div class="prog-step" id="pt-4" onclick="goSection(4)">OBJECTIONS</div>
-    <div class="prog-step" id="pt-5" onclick="goSection(5)">SUBMIT LEAD</div>
+    <div class="prog-step" id="pt-5" onclick="goSection(5)">VOICEMAIL</div>
+    <div class="prog-step" id="pt-6" onclick="goSection(6)">SUBMIT LEAD</div>
   </div>
 
   <!-- SECTION 0: INTRO -->
   <div class="section active" id="sec-0">
     <div class="step-indicator">STEP 01 // OPENER</div>
     <div class="card cyan">
-      <div class="card-title">📡 INTRODUCTION SEQUENCE</div>
+      <div class="card-title">📡 INTRODUCTION</div>
 
       <div class="script-line">
         <span class="line-num">01</span>
-        <span class="line-text">Hi, is <span class="placeholder">(SELLER NAME)</span> there?</span>
+        <span class="line-text">Hi, can I speak with <span class="placeholder">[SELLER NAME]</span>?</span>
       </div>
-      <div class="cyber-divider"></div>
+      <div class="tip-box">Warm, natural — don't rush it. Wait for them to respond before moving on.</div>
 
       <div class="script-line">
         <span class="line-num">02</span>
-        <span class="line-text">Hey <span class="placeholder">(SELLER NAME)</span>, this is John from Ever Offer.</span>
+        <span class="line-text">Hey <span class="placeholder">[SELLER NAME]</span>, this is John — how are you doing today? <span class="pause-cue">[let them respond]</span></span>
       </div>
-      <div class="cyber-divider"></div>
+      <div class="tip-box">Genuinely wait for an answer. Mirror their energy — if they're short, don't ramble.</div>
 
       <div class="script-line">
         <span class="line-num">03</span>
-        <span class="line-text">I was actually reaching out to you about your property on <span class="placeholder">(PROPERTY STREET NAME)</span> here in <span class="placeholder">(CITY NAME)</span>.</span>
+        <span class="line-text">Good, good — hey, the reason I'm reaching out is I came across your property over on <span class="placeholder">[STREET NAME]</span> in <span class="placeholder">[CITY]</span>. Is that still yours?</span>
       </div>
-      <div class="cyber-divider"></div>
+      <div class="tip-box">Framing it as a question keeps it conversational — not a pitch. Works well even if they're guarded.</div>
 
       <div class="script-line">
         <span class="line-num">04</span>
-        <span class="line-text">Does that <span class="placeholder">ring a bell?</span> <em style="color:#555; font-size:0.8rem;">[pause for response]</em></span>
+        <span class="line-text">I wanted to see if you'd had any thoughts about possibly selling — has that ever crossed your mind? <span class="pause-cue">[pause — let silence work for you]</span></span>
       </div>
-      <div class="cyber-divider"></div>
-
-      <div class="script-line">
-        <span class="line-num">05</span>
-        <span class="line-text">I wanted to see if you ever thought about <strong style="color:var(--cyan)">selling</strong>?</span>
-      </div>
+      <div class="tip-box">"Ever crossed your mind" is softer than "are you selling" — less pressure, more conversation.</div>
 
       <div class="step-nav">
         <button class="btn btn-primary" onclick="goSection(1)">NEXT: GAUGE INTEREST ▶</button>
@@ -619,18 +632,19 @@
     <div class="step-indicator">STEP 02 // INTEREST CHECK</div>
     <div class="card magenta">
       <div class="card-title">⚡ SELLER RESPONSE</div>
-      <p style="font-size:0.85rem; margin-bottom:16px; color:#888;">Select seller's response to load the correct branch:</p>
+      <p style="font-size:0.85rem; margin-bottom:16px; color:#888;">Select their response to load the correct path:</p>
 
       <div class="branch-row">
-        <button class="branch-btn yes" id="br-yes" onclick="selectBranch('yes')">✔ YES / MAYBE</button>
-        <button class="branch-btn no" id="br-no" onclick="selectBranch('no')">✖ NO</button>
+        <button class="branch-btn yes" id="br-yes" onclick="selectBranch('yes')">✔ YES / OPEN TO IT</button>
+        <button class="branch-btn no" id="br-no" onclick="selectBranch('no')">✖ NOT INTERESTED</button>
       </div>
 
       <div class="branch-content yes-content" id="bc-yes">
         <div class="script-line">
           <span class="line-num" style="color:var(--green)">▶</span>
-          <span class="line-text">Well great! I'm glad I got ahold of you. I can actually help put together an offer for you — I just have to ask you a couple questions about the property. Do you have <strong style="color:var(--green)">30 seconds?</strong></span>
+          <span class="line-text">Oh, perfect timing then. So what we do is put together cash offers — no agents, no fees, no hassle. I just need to grab a couple quick details about the place so I can get the right people to take a look for you. <strong style="color:var(--green)">You got about two minutes?</strong></span>
         </div>
+        <div class="tip-box" style="margin-left:0;">Say "two minutes" not "30 seconds" — sounds more genuine and sets realistic expectations.</div>
         <div style="margin-top:14px;">
           <button class="btn btn-success" onclick="goSection(2); markDone(1);">PROCEED TO FACT FIND ▶</button>
         </div>
@@ -639,11 +653,13 @@
       <div class="branch-content no-content" id="bc-no">
         <div class="script-line">
           <span class="line-num" style="color:var(--magenta)">▶</span>
-          <span class="line-text">Okay — well do you happen to know anybody who is interested in selling their property? I can pay <strong style="color:var(--magenta)">100% cash</strong> for the property and close as quick as <strong style="color:var(--magenta)">14 days</strong>.</span>
+          <span class="line-text">Oh, totally understand — I appreciate you being straight with me. Hey, just out of curiosity — do you know anyone in the area who might be looking to sell? We do <strong style="color:var(--magenta)">all-cash deals</strong> and can close in as little as <strong style="color:var(--magenta)">two weeks</strong>, so it's super easy for the seller.</span>
         </div>
+        <div class="tip-box" style="margin-left:0;">Don't hang up yet — a referral ask costs nothing. Stay warm, not pushy.</div>
         <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
           <button class="btn btn-danger" onclick="goSection(4)">VIEW OBJECTIONS</button>
-          <button class="btn btn-primary" onclick="goSection(5); markDone(1);">LOG CALL</button>
+          <button class="btn btn-primary" onclick="goSection(5)">VOICEMAIL TIPS</button>
+          <button class="btn btn-success" onclick="goSection(6); markDone(1);">LOG CALL</button>
         </div>
       </div>
 
@@ -668,19 +684,25 @@
     <!-- VACANT -->
     <div class="factfind-content" id="ff-vacant">
       <div class="card cyan">
-        <div class="card-title">🏚 VACANT — FACT FIND QUESTIONS</div>
+        <div class="card-title">🏚 VACANT — QUESTIONS</div>
 
-        <div class="script-line"><span class="line-num">Q1</span><span class="line-text">Now… is the property <strong style="color:var(--cyan)">vacant</strong>? <em style="color:#555; font-size:0.8rem;">[confirmed]</em></span></div>
-        <div class="cyber-divider"></div>
-        <div class="script-line"><span class="line-num">Q2</span><span class="line-text">Great — how long has it been <strong style="color:var(--cyan)">vacant?</strong></span></div>
-        <div class="cyber-divider"></div>
-        <div class="script-line"><span class="line-num">Q3</span><span class="line-text">Did you have any <strong style="color:var(--cyan)">plans</strong> for the property?</span></div>
-        <div class="cyber-divider"></div>
-        <div class="script-line"><span class="line-num">Q4</span><span class="line-text">Awesome — now is the property in pretty <strong style="color:var(--cyan)">good shape?</strong> Or… does it need a little <strong style="color:var(--cyan)">work?</strong></span></div>
-        <div class="cyber-divider"></div>
-        <div class="script-line"><span class="line-num">Q5</span><span class="line-text">Excellent — now did you have a particular <strong style="color:var(--cyan)">price in mind?</strong></span></div>
-        <div class="cyber-divider"></div>
-        <div class="script-line"><span class="line-num">Q6</span><span class="line-text">Okay, if we could come to an agreement on price — how soon were you looking to <strong style="color:var(--cyan)">sell?</strong></span></div>
+        <div class="script-line"><span class="line-num">Q1</span><span class="line-text">So the place has been sitting vacant — is that right?</span></div>
+        <div class="tip-box">Confirm, don't interrogate. Let them clarify.</div>
+
+        <div class="script-line"><span class="line-num">Q2</span><span class="line-text">Got it — and roughly how long has it been empty?</span></div>
+        <div class="tip-box">Longer = more motivated. Take mental note.</div>
+
+        <div class="script-line"><span class="line-num">Q3</span><span class="line-text">Had you figured out what you were going to do with it, or was it more of a "figure it out later" kind of situation?</span></div>
+        <div class="tip-box">Light and relatable — keeps it human, not clinical.</div>
+
+        <div class="script-line"><span class="line-num">Q4</span><span class="line-text">Okay, and what's the condition like — is it in decent shape or does it need some love?</span></div>
+        <div class="tip-box">"Need some love" is non-judgmental — sellers open up more easily.</div>
+
+        <div class="script-line"><span class="line-num">Q5</span><span class="line-text">And just so I can pass along the right info — did you have a ballpark number in mind, or were you open to hearing what we could do?</span></div>
+        <div class="tip-box">If they throw out a number, note it without reacting. Just say "okay, got it."</div>
+
+        <div class="script-line"><span class="line-num">Q6</span><span class="line-text">Perfect. And assuming we could land on a number that works — how soon would you realistically want to move on this?</span></div>
+        <div class="tip-box">Timeline = motivation indicator. ASAP is a hot lead.</div>
 
         <div class="step-nav">
           <button class="btn btn-primary" onclick="goSection(3); markDone(2);">PROCEED TO PASS OFF ▶</button>
@@ -691,19 +713,22 @@
     <!-- RENTED -->
     <div class="factfind-content" id="ff-rented">
       <div class="card cyan">
-        <div class="card-title">🔑 RENTED — FACT FIND QUESTIONS</div>
+        <div class="card-title">🔑 RENTED — QUESTIONS</div>
 
-        <div class="script-line"><span class="line-num">Q1</span><span class="line-text">Now… is the property being <strong style="color:var(--cyan)">rented out?</strong> <em style="color:#555; font-size:0.8rem;">[confirmed]</em></span></div>
-        <div class="cyber-divider"></div>
-        <div class="script-line"><span class="line-num">Q2</span><span class="line-text">Great — are the tenants <strong style="color:var(--cyan)">month-to-month</strong> or on a <strong style="color:var(--cyan)">lease?</strong></span></div>
-        <div class="cyber-divider"></div>
-        <div class="script-line"><span class="line-num">Q3</span><span class="line-text">Awesome — now is the property in pretty <strong style="color:var(--cyan)">good shape?</strong> Or… does it need a little <strong style="color:var(--cyan)">work?</strong></span></div>
-        <div class="cyber-divider"></div>
-        <div class="script-line"><span class="line-num">Q4</span><span class="line-text">What does the <strong style="color:var(--cyan)">inside</strong> look like?</span></div>
-        <div class="cyber-divider"></div>
-        <div class="script-line"><span class="line-num">Q5</span><span class="line-text">Excellent — now do you have a particular <strong style="color:var(--cyan)">price in mind?</strong></span></div>
-        <div class="cyber-divider"></div>
-        <div class="script-line"><span class="line-num">Q6</span><span class="line-text">Okay, if we could come to an agreement on price — how soon were you looking to <strong style="color:var(--cyan)">sell?</strong></span></div>
+        <div class="script-line"><span class="line-num">Q1</span><span class="line-text">So you've got tenants in there right now — is that right?</span></div>
+        <div class="tip-box">Confirm the situation before diving in.</div>
+
+        <div class="script-line"><span class="line-num">Q2</span><span class="line-text">And are they on a month-to-month or locked into a lease?</span></div>
+        <div class="tip-box">Month-to-month = more flexible deal. Lease = factor in timing.</div>
+
+        <div class="script-line"><span class="line-num">Q3</span><span class="line-text">Got it. And how's the property overall — in pretty good shape or are there things that need attention?</span></div>
+
+        <div class="script-line"><span class="line-num">Q4</span><span class="line-text">And what does the inside look like — has it been well kept up?</span></div>
+        <div class="tip-box">Tenanted properties can vary a lot. Interior condition matters.</div>
+
+        <div class="script-line"><span class="line-num">Q5</span><span class="line-text">Did you have a number in mind for it, or were you open to hearing what we could put together?</span></div>
+
+        <div class="script-line"><span class="line-num">Q6</span><span class="line-text">And if things lined up — what kind of timeline were you thinking?</span></div>
 
         <div class="step-nav">
           <button class="btn btn-primary" onclick="goSection(3); markDone(2);">PROCEED TO PASS OFF ▶</button>
@@ -714,19 +739,23 @@
     <!-- OWNER OCCUPIED -->
     <div class="factfind-content" id="ff-occupied">
       <div class="card cyan">
-        <div class="card-title">🏠 OWNER OCCUPIED — FACT FIND QUESTIONS</div>
+        <div class="card-title">🏠 OWNER OCCUPIED — QUESTIONS</div>
 
-        <div class="script-line"><span class="line-num">Q1</span><span class="line-text">Now… is the property <strong style="color:var(--cyan)">owner occupied?</strong> <em style="color:#555; font-size:0.8rem;">[confirmed]</em></span></div>
-        <div class="cyber-divider"></div>
-        <div class="script-line"><span class="line-num">Q2</span><span class="line-text">Great — how long have you been <strong style="color:var(--cyan)">living in the property?</strong></span></div>
-        <div class="cyber-divider"></div>
-        <div class="script-line"><span class="line-num">Q3</span><span class="line-text">Awesome — now is the property in pretty <strong style="color:var(--cyan)">good shape?</strong> Or… does it need a little <strong style="color:var(--cyan)">work?</strong></span></div>
-        <div class="cyber-divider"></div>
-        <div class="script-line"><span class="line-num">Q4</span><span class="line-text">What does the <strong style="color:var(--cyan)">inside</strong> look like?</span></div>
-        <div class="cyber-divider"></div>
-        <div class="script-line"><span class="line-num">Q5</span><span class="line-text">Excellent — now do you have a particular <strong style="color:var(--cyan)">price in mind?</strong></span></div>
-        <div class="cyber-divider"></div>
-        <div class="script-line"><span class="line-num">Q6</span><span class="line-text">Okay, if we could come to an agreement on price — how soon were you looking to <strong style="color:var(--cyan)">sell?</strong></span></div>
+        <div class="script-line"><span class="line-num">Q1</span><span class="line-text">And you're actually living there yourself right now?</span></div>
+        <div class="tip-box">Confirm — this changes the whole approach. Be extra respectful of their space.</div>
+
+        <div class="script-line"><span class="line-num">Q2</span><span class="line-text">How long have you been there? <span class="pause-cue">[let them share]</span></span></div>
+        <div class="tip-box">This builds rapport. Long-term owners often have equity and emotional ties — be patient.</div>
+
+        <div class="script-line"><span class="line-num">Q3</span><span class="line-text">And the property — is it in pretty good condition overall, or are there some things you've been meaning to get to?</span></div>
+        <div class="tip-box">"Meaning to get to" is relatable — removes embarrassment about deferred maintenance.</div>
+
+        <div class="script-line"><span class="line-num">Q4</span><span class="line-text">What's the interior like — has it been updated or is it more original?</span></div>
+
+        <div class="script-line"><span class="line-num">Q5</span><span class="line-text">Did you have a number in mind, or were you open to seeing what we could come in with?</span></div>
+
+        <div class="script-line"><span class="line-num">Q6</span><span class="line-text">And if the numbers made sense — is this something you'd want to move on fairly soon, or is timing flexible on your end?</span></div>
+        <div class="tip-box">Owner-occupied sellers often need more runway. Don't pressure on timeline.</div>
 
         <div class="step-nav">
           <button class="btn btn-primary" onclick="goSection(3); markDone(2);">PROCEED TO PASS OFF ▶</button>
@@ -747,16 +776,28 @@
 
       <div class="script-line">
         <span class="line-num">01</span>
-        <span class="line-text">Okay — we're interested. My manager will give you a call sometime <strong style="color:var(--green)">today or tomorrow</strong> to put together an offer for you. What's your <strong style="color:var(--green)">best cell number?</strong></span>
+        <span class="line-text">Awesome — I've got everything I need. So what happens now is my manager is going to give you a call, probably <strong style="color:var(--green)">today or first thing tomorrow</strong>, to go over the numbers with you. What's the best number to reach you on?</span>
       </div>
+      <div class="tip-box">Get the number naturally — it comes right after telling them what to expect next.</div>
+
       <div class="cyber-divider"></div>
+
       <div class="script-line">
         <span class="line-num">02</span>
-        <span class="line-text">And by the way — did you have any <strong style="color:var(--green)">other properties</strong> you were looking to sell? <br><br><span class="placeholder">(SELLER NAME)</span>, it was great talking to you — have a <strong style="color:var(--green)">wonderful day!</strong></span>
+        <span class="line-text">Perfect. And hey — totally random question, but do you have any <strong style="color:var(--green)">other properties</strong> you've been thinking about moving? We're buying a lot in <span class="placeholder">[CITY]</span> right now.</span>
       </div>
+      <div class="tip-box">Always ask. Sometimes they have more — or their neighbor does.</div>
+
+      <div class="cyber-divider"></div>
+
+      <div class="script-line">
+        <span class="line-num">03</span>
+        <span class="line-text"><span class="placeholder">[SELLER NAME]</span>, it was really great talking to you — you'll hear from us soon. You have a good one!</span>
+      </div>
+      <div class="tip-box">Warm close. Don't drag it out — end confident and friendly.</div>
 
       <div class="step-nav">
-        <button class="btn btn-success" onclick="goSection(5); markDone(3);">SUBMIT LEAD ▶</button>
+        <button class="btn btn-success" onclick="goSection(6); markDone(3);">SUBMIT LEAD ▶</button>
         <button class="btn btn-danger" onclick="goSection(2)">◀ BACK</button>
       </div>
     </div>
@@ -770,74 +811,172 @@
 
       <div class="objection-item">
         <button class="objection-trigger" onclick="toggleObj(this)">
-          <span>❓ "Hey! How did you get my number?"</span>
+          <span>❓ "How did you get my number?"</span>
           <span class="arrow">▶</span>
         </button>
         <div class="objection-answer">
-          It's all public info — we did a public record search on the title and your name popped up. <em>[bounce back and re-engage]</em>
+          We did a public records search on the property — your name came up as the owner so we just tracked down a contact from there. Nothing weird, just how we find property owners in the area. <span class="pause-cue">[then pivot]</span> Anyway, while I've got you — have you ever thought about what you'd take for the place?
+          <div class="obj-tip">→ Normalize it fast and redirect. Most people accept this instantly.</div>
         </div>
       </div>
 
       <div class="objection-item">
         <button class="objection-trigger" onclick="toggleObj(this)">
-          <span>❓ "Well, does it look like I have a for sale sign in my yard?"</span>
+          <span>❓ "I'm not selling. Do I look like I have a for sale sign up?"</span>
           <span class="arrow">▶</span>
         </button>
         <div class="objection-answer">
-          You know what — my mistake. Do you possibly know anyone who is looking to sell? I've been looking to buy property in this area for quite some time. <em>[bounce back and re-engage]</em>
+          Ha — fair point, I get it. We actually reach out before properties go on the market because sometimes it just makes sense for people to skip all the hassle. But no worries at all. Hey, do you know anyone in the neighborhood who might be thinking about selling? We pay cash and close fast.
+          <div class="obj-tip">→ Lighten it up, don't apologize excessively. Pivot to referral.</div>
         </div>
       </div>
 
       <div class="objection-item">
         <button class="objection-trigger" onclick="toggleObj(this)">
-          <span>❓ "No, not right now."</span>
+          <span>❓ "Not right now — maybe in the future."</span>
           <span class="arrow">▶</span>
         </button>
         <div class="objection-answer">
-          Okay — possibly in the future? <em>[If YES → get time period: weeks / months / years]</em>
+          Totally fair — are we talking more like a few months out, or more like a year or two down the road? <span class="pause-cue">[let them answer]</span><br><br>
+          <em>If months:</em> Got it — well how about I have someone reach back out around that time? I'd hate for you to have to deal with agents and all that when you're ready.<br><br>
+          <em>If years:</em> No problem at all — I'll make a note. Is there a good way to reach you when the time's right?
+          <div class="obj-tip">→ Get a timeline, then offer a future follow-up. Every "future" lead is worth tracking.</div>
         </div>
       </div>
 
       <div class="objection-item">
         <button class="objection-trigger" onclick="toggleObj(this)">
-          <span>❓ "How much are you going to offer me?"</span>
+          <span>❓ "What are you going to offer me?"</span>
           <span class="arrow">▶</span>
         </button>
         <div class="objection-answer">
-          As much as I possibly can — but let me ask you this: if we could come to an agreement, are you ready to make a decision within the next <strong style="color:var(--green)">48 hours?</strong>
+          Honestly, I want to get you as much as we possibly can — but I need to grab a couple details first so the number actually means something. The last thing I want to do is throw out a random figure. Give me two minutes and I'll make sure whoever calls you is ready to put a real number on the table. Sound fair?
+          <div class="obj-tip">→ Don't dodge it — frame why you can't answer yet in a way that benefits them.</div>
         </div>
       </div>
 
       <div class="objection-item">
         <button class="objection-trigger" onclick="toggleObj(this)">
-          <span>❓ "Why are you calling from California?"</span>
+          <span>❓ "Why does it say you're calling from California?"</span>
           <span class="arrow">▶</span>
         </button>
         <div class="objection-answer">
-          Our company is based in California — however our escrow company, assistants, and real estate team are all in <span class="placeholder">(CITY NAME)</span>.
+          Yeah, our main office is out here in California — but we've got a whole team on the ground in <span class="placeholder">[CITY]</span>. The title company, the local reps, all of it is right there. We're pretty active in your market right now, actually.
+          <div class="obj-tip">→ Acknowledge it casually, ground them with local presence.</div>
         </div>
       </div>
 
       <div class="objection-item">
         <button class="objection-trigger" onclick="toggleObj(this)">
-          <span>❓ "Well, do you even live in (city name)?"</span>
+          <span>❓ "Is this a scam?"</span>
           <span class="arrow">▶</span>
         </button>
         <div class="objection-answer">
-          Our home office is in California — however our escrow office, assistants, and team are right there in <span class="placeholder">(CITY NAME)</span>.
+          Totally understand the skepticism — you should be careful. We're Ever Offer, we've been buying properties in <span class="placeholder">[CITY]</span> for a while now — all legit, all through a title company, nothing out of pocket for you. You can look us up. And honestly, you're under zero obligation — my manager would just put together an offer, you look it over, no pressure.
+          <div class="obj-tip">→ Stay calm, don't get defensive. Validate their caution, then make it feel low-risk.</div>
+        </div>
+      </div>
+
+      <div class="objection-item">
+        <button class="objection-trigger" onclick="toggleObj(this)">
+          <span>❓ "I'm already working with a realtor."</span>
+          <span class="arrow">▶</span>
+        </button>
+        <div class="objection-answer">
+          Oh, totally get it — that makes sense. The one thing I'd just say is we're a cash buyer so there's no listing, no open houses, no waiting on financing. Sometimes it's worth having both on the table just to compare. But I hear you — if you're locked in I don't want to complicate things.
+          <div class="obj-tip">→ Don't fight the realtor. Position your offer as a parallel option, not a replacement.</div>
+        </div>
+      </div>
+
+      <div class="objection-item">
+        <button class="objection-trigger" onclick="toggleObj(this)">
+          <span>❓ "Can you just send me something in writing?"</span>
+          <span class="arrow">▶</span>
+        </button>
+        <div class="objection-answer">
+          For sure — what's the best email to send it to? <span class="pause-cue">[get the email]</span> Perfect. And just so the offer actually reflects your place, do you have two minutes to answer a couple quick questions about the property?
+          <div class="obj-tip">→ Agree immediately, get the email, then use it as a bridge back into the fact find.</div>
         </div>
       </div>
 
       <div class="step-nav">
-        <button class="btn btn-primary" onclick="goSection(5)">SUBMIT LEAD ▶</button>
+        <button class="btn btn-primary" onclick="goSection(6)">SUBMIT LEAD ▶</button>
+        <button class="btn btn-primary" onclick="goSection(5)">VOICEMAIL ▶</button>
         <button class="btn btn-danger" onclick="goSection(1)">◀ BACK</button>
       </div>
     </div>
   </div>
 
-  <!-- SECTION 5: SUBMIT LEAD -->
+  <!-- SECTION 5: VOICEMAIL -->
   <div class="section" id="sec-5">
-    <div class="step-indicator">STEP 06 // SUBMIT LEAD</div>
+    <div class="step-indicator">STEP 06 // VOICEMAIL SCRIPTS</div>
+    <div class="card orange">
+      <div class="card-title">📬 VOICEMAIL SCRIPTS <span class="voicemail-badge">NO ANSWER</span></div>
+      <p style="font-size:0.82rem; color:#888; margin-bottom:16px;">Choose a version based on call attempt number. Keep it short — under 20 seconds.</p>
+
+      <div class="vm-tab-row">
+        <button class="vm-tab active" onclick="selectVM('first', this)">1ST ATTEMPT</button>
+        <button class="vm-tab" onclick="selectVM('second', this)">2ND ATTEMPT</button>
+        <button class="vm-tab" onclick="selectVM('final', this)">FINAL ATTEMPT</button>
+      </div>
+
+      <!-- 1ST ATTEMPT -->
+      <div class="vm-script visible" id="vm-first">
+        <div class="card cyan" style="margin-bottom:0;">
+          <div class="card-title" style="font-size:0.65rem;">1ST VOICEMAIL — CASUAL &amp; CURIOUS</div>
+          <div class="script-line">
+            <span class="line-num">VM</span>
+            <span class="line-text">
+              "Hey <span class="placeholder">[NAME]</span>, this is John — I was actually trying to reach you about your property on <span class="placeholder">[STREET]</span>. Nothing urgent, just had a quick question for you. Give me a call back when you get a chance — <span class="placeholder">[YOUR NUMBER]</span>. Thanks!"
+            </span>
+          </div>
+          <div class="tip-box" style="margin-left:0;">"Nothing urgent" and "quick question" reduce defensiveness. Don't mention buying or real estate yet.</div>
+          <button class="copy-vm-btn" onclick="copyVM('first')">📋 COPY SCRIPT</button>
+        </div>
+      </div>
+
+      <!-- 2ND ATTEMPT -->
+      <div class="vm-script" id="vm-second">
+        <div class="card cyan" style="margin-bottom:0;">
+          <div class="card-title" style="font-size:0.65rem;">2ND VOICEMAIL — SLIGHT REVEAL</div>
+          <div class="script-line">
+            <span class="line-num">VM</span>
+            <span class="line-text">
+              "Hey <span class="placeholder">[NAME]</span>, John again — tried you a bit earlier. I'm reaching out about <span class="placeholder">[STREET ADDRESS]</span>. We're looking at properties in the area and I just wanted to run something by you real quick. <span class="placeholder">[YOUR NUMBER]</span> — hope to hear from you!"
+            </span>
+          </div>
+          <div class="tip-box" style="margin-left:0;">"Run something by you" is vague but intriguing — gives them a reason to call back without triggering a hard sell reflex.</div>
+          <button class="copy-vm-btn" onclick="copyVM('second')">📋 COPY SCRIPT</button>
+        </div>
+      </div>
+
+      <!-- FINAL ATTEMPT -->
+      <div class="vm-script" id="vm-final">
+        <div class="card cyan" style="margin-bottom:0;">
+          <div class="card-title" style="font-size:0.65rem;">FINAL VOICEMAIL — SOFT CLOSE</div>
+          <div class="script-line">
+            <span class="line-num">VM</span>
+            <span class="line-text">
+              "Hey <span class="placeholder">[NAME]</span>, this'll be the last time I bug you — I promise. This is John, I've been trying to connect about your property on <span class="placeholder">[STREET]</span>. If you've ever thought about selling, even down the road, I'd love to chat. <span class="placeholder">[YOUR NUMBER]</span>. Take care!"
+            </span>
+          </div>
+          <div class="tip-box" style="margin-left:0;">"Last time I bug you" is disarming — people often call back because they feel you respected their time. "Even down the road" removes urgency pressure.</div>
+          <button class="copy-vm-btn" onclick="copyVM('final')">📋 COPY SCRIPT</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="step-nav">
+      <button class="btn btn-success" onclick="goSection(6); markDone(5);">SUBMIT LEAD ▶</button>
+      <button class="btn btn-danger" onclick="goSection(4)">◀ OBJECTIONS</button>
+      <button class="btn btn-primary" onclick="goSection(0)">↺ NEW CALL</button>
+    </div>
+  </div>
+
+  <!-- SECTION 6: SUBMIT LEAD -->
+  <div class="section" id="sec-6">
+    <div class="step-indicator">STEP 07 // SUBMIT LEAD</div>
     <div class="card green">
       <div class="card-title">📋 CALL NOTES — SUBMIT LEAD</div>
 
@@ -855,7 +994,7 @@
 
         <div class="form-group">
           <label>Reason for Selling</label>
-          <input type="text" id="f-reason" placeholder="e.g. Relocating, inherited property..." />
+          <input type="text" id="f-reason" placeholder="e.g. Relocating, inherited, financial..." />
         </div>
 
         <div class="form-group">
@@ -871,6 +1010,22 @@
         </div>
 
         <div class="form-group">
+          <label>Property Status</label>
+          <select id="f-status">
+            <option value="">-- Select --</option>
+            <option>Vacant</option>
+            <option>Rented — Month-to-Month</option>
+            <option>Rented — On Lease</option>
+            <option>Owner Occupied</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Seller's Asking Price</label>
+          <input type="text" id="f-price" placeholder="e.g. $180,000 or 'Open to offers'" />
+        </div>
+
+        <div class="form-group">
           <label>Timeline to Sell</label>
           <select id="f-timeline">
             <option value="">-- Select --</option>
@@ -879,6 +1034,7 @@
             <option>1–3 Months</option>
             <option>3–6 Months</option>
             <option>6+ Months / Flexible</option>
+            <option>Future Follow-up Only</option>
           </select>
         </div>
 
@@ -895,13 +1051,27 @@
         </div>
 
         <div class="form-group">
-          <label>Call Back Time Scheduled</label>
+          <label>Call Back Scheduled</label>
           <input type="text" id="f-callback" placeholder="e.g. Tomorrow 2PM, or ASAP" />
+        </div>
+
+        <div class="form-group">
+          <label>Call Outcome</label>
+          <select id="f-outcome">
+            <option value="">-- Select --</option>
+            <option>Interested — Pass Off Complete</option>
+            <option>Interested — Needs Follow Up</option>
+            <option>Not Now — Future Follow Up</option>
+            <option>Not Interested — Referral Given</option>
+            <option>Not Interested — Dead Lead</option>
+            <option>Voicemail Left</option>
+            <option>No Answer — No VM</option>
+          </select>
         </div>
 
         <div class="form-group full">
           <label>Additional Notes</label>
-          <textarea id="f-notes" placeholder="Any extra details about the property, seller attitude, price mentioned, etc."></textarea>
+          <textarea id="f-notes" placeholder="Seller attitude, price mentioned, property details, any flags or highlights..."></textarea>
         </div>
 
       </div>
@@ -917,7 +1087,6 @@
 
 </div>
 
-<!-- Toast -->
 <div class="copy-toast" id="toast">✔ COPIED TO CLIPBOARD</div>
 
 <script>
@@ -975,14 +1144,36 @@
   function toggleObj(btn) {
     const answer = btn.nextElementSibling;
     const isOpen = answer.classList.contains('visible');
-    // Close all
     document.querySelectorAll('.objection-answer').forEach(a => a.classList.remove('visible'));
     document.querySelectorAll('.objection-trigger').forEach(b => b.classList.remove('open'));
-    // Toggle clicked
     if (!isOpen) {
       answer.classList.add('visible');
       btn.classList.add('open');
     }
+  }
+
+  function selectVM(type, btn) {
+    document.querySelectorAll('.vm-script').forEach(s => s.classList.remove('visible'));
+    document.querySelectorAll('.vm-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('vm-' + type).classList.add('visible');
+    btn.classList.add('active');
+  }
+
+  function copyVM(type) {
+    const scripts = {
+      first: `Hey [NAME], this is John — I was actually trying to reach you about your property on [STREET]. Nothing urgent, just had a quick question for you. Give me a call back when you get a chance — [YOUR NUMBER]. Thanks!`,
+      second: `Hey [NAME], John again — tried you a bit earlier. I'm reaching out about [STREET ADDRESS]. We're looking at properties in the area and I just wanted to run something by you real quick. [YOUR NUMBER] — hope to hear from you!`,
+      final: `Hey [NAME], this'll be the last time I bug you — I promise. This is John, I've been trying to connect about your property on [STREET]. If you've ever thought about selling, even down the road, I'd love to chat. [YOUR NUMBER]. Take care!`
+    };
+    navigator.clipboard.writeText(scripts[type]).then(showToast).catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = scripts[type];
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast();
+    });
   }
 
   function setMotivation(btn) {
@@ -992,15 +1183,24 @@
     document.getElementById('f-motivation').value = motivationVal;
   }
 
+  function showToast() {
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
+  }
+
   function copyLead() {
-    const name = document.getElementById('f-name').value || '—';
-    const address = document.getElementById('f-address').value || '—';
-    const reason = document.getElementById('f-reason').value || '—';
+    const name      = document.getElementById('f-name').value || '—';
+    const address   = document.getElementById('f-address').value || '—';
+    const reason    = document.getElementById('f-reason').value || '—';
     const condition = document.getElementById('f-condition').value || '—';
-    const timeline = document.getElementById('f-timeline').value || '—';
-    const motivation = motivationVal || '—';
-    const callback = document.getElementById('f-callback').value || '—';
-    const notes = document.getElementById('f-notes').value || '—';
+    const status    = document.getElementById('f-status').value || '—';
+    const price     = document.getElementById('f-price').value || '—';
+    const timeline  = document.getElementById('f-timeline').value || '—';
+    const motivation= motivationVal || '—';
+    const callback  = document.getElementById('f-callback').value || '—';
+    const outcome   = document.getElementById('f-outcome').value || '—';
+    const notes     = document.getElementById('f-notes').value || '—';
 
     const text =
 `SUBMIT LEAD:
@@ -1008,58 +1208,46 @@ Seller Name: ${name}
 Address: ${address}
 Reason for Selling: ${reason}
 Property Condition: ${condition}
+Property Status: ${status}
+Asking Price: ${price}
 Timeline: ${timeline}
 Motivation Level: ${motivation}
-Call Back Time Scheduled: ${callback}
+Call Back Scheduled: ${callback}
+Call Outcome: ${outcome}
 Additional Notes: ${notes}`;
 
-    navigator.clipboard.writeText(text).then(() => {
-      const toast = document.getElementById('toast');
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 2500);
-    }).catch(() => {
-      // Fallback
+    navigator.clipboard.writeText(text).then(showToast).catch(() => {
       const ta = document.createElement('textarea');
       ta.value = text;
       document.body.appendChild(ta);
       ta.select();
       document.execCommand('copy');
       document.body.removeChild(ta);
-      const toast = document.getElementById('toast');
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 2500);
+      showToast();
     });
   }
 
   function resetAll() {
-    // Clear form
-    ['f-name','f-address','f-reason','f-callback','f-notes'].forEach(id => {
+    ['f-name','f-address','f-reason','f-callback','f-notes','f-price'].forEach(id => {
       document.getElementById(id).value = '';
     });
-    document.getElementById('f-condition').value = '';
-    document.getElementById('f-timeline').value = '';
-    document.getElementById('f-motivation').value = '';
+    ['f-condition','f-timeline','f-motivation','f-status','f-outcome'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
     motivationVal = '';
     document.querySelectorAll('.mot-btn').forEach(b => b.classList.remove('sel'));
-
-    // Reset branches
     document.getElementById('bc-yes').classList.remove('visible');
     document.getElementById('bc-no').classList.remove('visible');
     document.getElementById('br-yes').classList.remove('selected');
     document.getElementById('br-no').classList.remove('selected');
-
-    // Reset prop
     ['vacant','rented','occupied'].forEach(t => {
       document.getElementById('ff-' + t).classList.remove('visible');
       document.getElementById('pp-' + t).classList.remove('selected');
     });
-
-    // Reset progress
     document.querySelectorAll('.prog-step').forEach((p, i) => {
       p.classList.remove('done', 'active');
       if (i === 0) p.classList.add('active');
     });
-
     goSection(0);
   }
 </script>
