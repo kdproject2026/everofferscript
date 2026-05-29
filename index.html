@@ -927,7 +927,7 @@
           <div class="script-line">
             <span class="line-num">VM</span>
             <span class="line-text">
-              "Hey <span class="placeholder">[NAME]</span>, this is John — I was actually trying to reach you about your property on <span class="placeholder">[STREET]</span>. Nothing urgent, just had a quick question for you. Give me a call back when you get a chance — <span class="placeholder">[YOUR NUMBER]</span>. Thanks!"
+              "Hey <span class="placeholder">[NAME]</span>, this is John from Ever Offer— I was actually trying to reach you about your property on <span class="placeholder">[STREET]</span>. Nothing urgent, just had a quick question for you. Give me a call back when you get a chance — <span class="placeholder">[YOUR NUMBER]</span>. Thanks!"
             </span>
           </div>
           <div class="tip-box" style="margin-left:0;">"Nothing urgent" and "quick question" reduce defensiveness. Don't mention buying or real estate yet.</div>
@@ -957,7 +957,7 @@
           <div class="script-line">
             <span class="line-num">VM</span>
             <span class="line-text">
-              "Hey <span class="placeholder">[NAME]</span>, this'll be the last time I bug you — I promise. This is John, I've been trying to connect about your property on <span class="placeholder">[STREET]</span>. If you've ever thought about selling, even down the road, I'd love to chat. <span class="placeholder">[YOUR NUMBER]</span>. Take care!"
+              "Hey <span class="placeholder">[NAME]</span>, this'll be the last time I bug you — I promise. This is John from Ever Offer, I've been trying to connect about your property on <span class="placeholder">[STREET]</span>. If you've ever thought about selling, even down the road, I'd love to chat. <span class="placeholder">[YOUR NUMBER]</span>. Take care!"
             </span>
           </div>
           <div class="tip-box" style="margin-left:0;">"Last time I bug you" is disarming — people often call back because they feel you respected their time. "Even down the road" removes urgency pressure.</div>
@@ -1163,7 +1163,7 @@
     const scripts = {
       first: `Hey [NAME], this is John — I was actually trying to reach you about your property on [STREET]. Nothing urgent, just had a quick question for you. Give me a call back when you get a chance — [YOUR NUMBER]. Thanks!`,
       second: `Hey [NAME], John again — tried you a bit earlier. I'm reaching out about [STREET ADDRESS]. We're looking at properties in the area and I just wanted to run something by you real quick. [YOUR NUMBER] — hope to hear from you!`,
-      final: `Hey [NAME], this'll be the last time I bug you — I promise. This is John, I've been trying to connect about your property on [STREET]. If you've ever thought about selling, even down the road, I'd love to chat. [YOUR NUMBER]. Take care!`
+      final: `Hey [NAME], this'll be the last time I bug you — I promise. This is John from ever Offer, I've been trying to connect about your property on [STREET]. If you've ever thought about selling, even down the road, I'd love to chat. [YOUR NUMBER]. Take care!`
     };
     navigator.clipboard.writeText(scripts[type]).then(showToast).catch(() => {
       const ta = document.createElement('textarea');
